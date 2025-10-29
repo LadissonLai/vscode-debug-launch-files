@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CARLA Leaderboard",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "/home/u20/miniforge3/envs/lmdrive/bin/python", //设置python解释器的路径
+            "cwd": "${workspaceFolder}", //设置python的当前工作路径
+            "program": "${workspaceFolder}/leaderboard/leaderboard/leaderboard_evaluator.py", //python执行文件
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            // 定义系统环境变量
+            "env": {
+                "CARLA_ROOT": "${workspaceFolder}/carla",
+                "CARLA_SERVER": "${workspaceFolder}/carla/CarlaUE4.sh",
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/carla/PythonAPI:${workspaceFolder}/carla/PythonAPI/carla:${workspaceFolder}/carla/PythonAPI/carla/agents:${workspaceFolder}/carla/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg:${workspaceFolder}/leaderboard:${workspaceFolder}/leaderboard/team_code:${workspaceFolder}/scenario_runner",
+                "LEADERBOARD_ROOT": "${workspaceFolder}/leaderboard",
+                "CHALLENGE_TRACK_CODENAME": "SENSORS",
+                "PORT": "2000",
+                "TM_PORT": "2500",
+                "DEBUG_CHALLENGE": "0",
+                "REPETITIONS": "1",
+                "ROUTES": "${workspaceFolder}/langauto/benchmark_mini.xml",
+                "TEAM_AGENT": "${workspaceFolder}/leaderboard/team_code/lmdriver_agent.py",
+                "TEAM_CONFIG": "${workspaceFolder}/leaderboard/team_code/lmdriver_config.py",
+                "CHECKPOINT_ENDPOINT": "${workspaceFolder}/results/sample_result.json",
+                "SCENARIOS": "${workspaceFolder}/leaderboard/data/official/all_towns_traffic_scenarios_public.json",
+                "SAVE_PATH": "${workspaceFolder}/data/eval",
+                "RESUME": "True"
+            },
+            // 定义传入的参数
+            "args": [
+                // --- 直接在这里构建完整的参数，这是标准做法 ---
+                "--scenarios=${workspaceFolder}/leaderboard/data/official/all_towns_traffic_scenarios_public.json",
+                "--routes=${workspaceFolder}/langauto/benchmark_mini.xml",
+                "--repetitions=1",
+                "--track=SENSORS",
+                "--checkpoint=${workspaceFolder}/results/sample_result.json",
+                "--agent=${workspaceFolder}/leaderboard/team_code/lmdriver_agent.py",
+                "--agent-config=${workspaceFolder}/leaderboard/team_code/lmdriver_config.py",
+                "--debug=0",
+                "--resume=True",
+                "--port=2000",
+                "--trafficManagerPort=2500"
+            ]
+        }
+    ]
+}
